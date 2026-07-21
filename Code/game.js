@@ -88,6 +88,20 @@ function stopSnow() {
   document.getElementById('snow-container').innerHTML = '';
 }
 
+const track = document.getElementById('myTrack');
+const button = document.getElementById('musicButton');
+
+button.addEventListener('click', () => {
+  if (track.paused) {
+    track.play();
+    button.classList.add('paused');
+  }
+  else {
+    track.pause();
+    button.classList.remove('paused');
+  }
+});
+
 const textNodes = [
   {
     id: 1,

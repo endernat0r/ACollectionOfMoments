@@ -115,3 +115,29 @@ body {
   0% { transform: translate3d(var(--left-ini), 0, 0); }
   100% { transform: translate3d(var(--left-end), 110vh, 0); }
 }
+
+.playButton {
+  bottom: 20px;
+  right: 20px;
+  position: fixed;
+  padding: 15px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: rgb(19, 255, 19);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.4);
+}
+
+.playButton:hover {
+  background-color: #1ed760;
+  transform: scale(1.05);
+}
+
+.playButton.paused {
+  background-color: #e91e63;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+}
