@@ -35,27 +35,65 @@ function selectOption(option) {
   if (nextTextNodeId <= 0) {
     return startGame()
   }
+  if (option.action) {
+    option.action()
+  }
   state = Object.assign(state, option.setState)
   showTextNode(nextTextNodeId)
+}
+
+function triggerMagicEffect() {
+  const overlay = document.getElementById('magic-overlay')
+  const body = document.body
+
+  overlay.classList.add('magic-active')
+  body.classList.add('shake-active')
+
+  setTimeout(() => {
+    overlay.classList.remove('magic-active')
+    body.classList.remove('shake-active')
+  }, 1200)
 }
 
 const textNodes = [
   {
     id: 1,
-    text: 'You wake up in a strange place and you see a jar of blue goo near you.',
+    text: 'You wake up in your dorm bed and suddenly a strange noise startles you.',
     options: [
       {
-        text: 'Take the goo',
+        text: 'Investigate the noise',
         setState: { blueGoo: true },
-        nextText: 2
+        nextText: 3
       },
       {
-        text: 'Leave the goo',
+        text: 'Sleep',
         nextText: 2
       }
     ]
   },
   {
+    id: 2,
+    text: 'You fall back asleep and have a great dream in which you are a famous actor playing jackyll and hyde on broadway.',
+    options: [
+        {text: 'Restart', nextText: -1}
+    ]
+  },
+  {
+    id: 3,
+    text: 'A magical door appears. You hesitantly touch it and get pulled into a an adventure trough time!',
+    options: [
+        {text: 'WHAT IS HAPPENING?', action: triggerMagicEffect, nextText: 4}
+    ]
+  },
+  {
+    id: 4,
+    text: 'You are pulled into somewhere and you found out that you are like a ghost. When you look down you see a 2 years younger yourself and Celal going through the Polar Festival'
+  }
+]
+
+startGame()
+
+/*
     id: 2,
     text: 'You venture forth in search of answers to where you are when you come across a merchant.',
     options: [
@@ -190,6 +228,4 @@ const textNodes = [
       }
     ]
   }
-]
-
-startGame()
+  */

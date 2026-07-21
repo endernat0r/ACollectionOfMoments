@@ -42,3 +42,48 @@ body {
 .btn:hover {
   border-color: black;
 }
+
+@keyframes screenShake {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-8px, 6px); }
+  40% { transform: translate(8px, -6px); }
+  60% { transform: translate(-5px, 3px); }
+  80% { transform: translate(5px, -3px); }
+  100% { transform: translate(0, 0); }
+}
+
+#magic-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.magic-active {
+  animation: magicPulse 1.2s ease-out forwards;
+}
+
+.shake-active {
+  animation: screenShake 0.4s ease-in-out;
+}
+
+@keyframes magicPulse {
+  0% {
+    opacity: 0;
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.8) 0%, rgba(59, 130, 246, 0.9) 50%, rgba(255, 255, 255, 1) 100%);
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(236, 72, 153, 1) 0%, rgba(147, 51, 234, 1) 60%, rgba(255, 255, 255, 1) 100%);
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
