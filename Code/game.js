@@ -10,7 +10,7 @@ function startGame() {
 
 function showTextNode(textNodeIndex) {
   const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
-    if (textNodeIndex === 4) {
+    if (textNodeIndex === 4 || textNodeIndex === 5 || textNodeIndex === 7) {
     startSnow();
   } else {
     stopSnow();
@@ -134,7 +134,78 @@ const textNodes = [
   },
   {
     id: 4,
-    text: 'You are pulled into somewhere and you found out that you are like a ghost. When you look down you see a 2 years younger yourself and Celal going through the Polar Festival'
+    text: 'You are pulled into somewhere and you found out that you are like a ghost. When you look down you see a 2 years younger yourself and Celal going somewhere. You decide to follow them and see what they are up to.',
+    options: [
+        {text: 'Follow them', nextText: 5}
+    ]
+  },
+  {
+    id: 5,
+    text: 'You follow them and see that they are going to the Polar Festival. You decide to follow them and see what they are up to.',
+    options: [
+        {text: 'Try to exit the place', nextText: 6},
+        {
+            text: 'Watch them from a distance',
+            requiredState: (currentState) => !currentState.clickStep, 
+            setState: { clickStep: 1 },
+            nextText: 5
+        },
+        {
+            text: 'Listen to them',
+            requiredState: (currentState) => currentState.clickStep === 1,
+            setState: { clickStep: 2 },
+            nextText: 5
+        },
+        {
+            text: 'Understand the situation',
+            requiredState: (currentState) => currentState.clickStep === 2,
+            setState: { clickStep: 3 },
+            nextText: 5
+        },
+        {
+            text: 'Your are now wise.',
+            customClass: 'btn-green',
+            requiredState: (currentState) => currentState.clickStep === 3,
+            setState: { wise: true },
+            nextText: 7
+        }
+    ]
+  },
+  {
+    id: 6,
+    text: 'You couldnt exit and lost sight of them. You hurry back to them.',
+    options: [
+        {text: 'Damn', nextText: 7}
+    ]
+  },
+  {id: 7,
+    text: 'A great mage comes and asks you what they did to move on.',
+    options: [
+        {
+            text: 'Oh no I forgot to watch them',
+            requiredState: (currentState) => !currentState.wise,
+            nextText: 8
+        },
+        {
+            text: 'Oh yeah I remember everything',
+            requiredState: (currentState) => currentState.wise === true,
+            nextText: 9
+        }
+    ]
+  },
+  {
+    id: 8,
+    text: 'Üstat is disappointed and sends you back to watch them again.',
+    options: [
+        {text: 'No Üstat pleaseeeee', nextText: 5}
+    ]
+  },
+  {
+    id: 9,
+    text: 'Üstat is pleased and treats you to a döner and künefe.',
+    options: [
+        {text: '🎉Thank you Üstat🎉', nextText: 10}
+    ]
   }
 ]
 
