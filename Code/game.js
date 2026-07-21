@@ -10,6 +10,11 @@ function startGame() {
 
 function showTextNode(textNodeIndex) {
   const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
+    if (textNodeIndex === 4) {
+    startSnow();
+  } else {
+    stopSnow();
+  }
   textElement.innerText = textNode.text
   while (optionButtonsElement.firstChild) {
     optionButtonsElement.removeChild(optionButtonsElement.firstChild)
@@ -53,6 +58,34 @@ function triggerMagicEffect() {
     overlay.classList.remove('magic-active')
     body.classList.remove('shake-active')
   }, 1200)
+}
+
+function startSnow() {
+  const container = document.getElementById('snow-container');
+  
+  if (container.children.length > 0) return; 
+
+  const random = (num) => Math.floor(Math.random() * num);
+
+  for (let i = 0; i < 50; i++) {
+    const flake = document.createElement('div');
+    flake.classList.add('snowflake');
+    
+    flake.style.cssText = `
+      --left: ${random(100)}vw; 
+      --left-ini: ${random(20) - 10}vw; 
+      --left-end: ${random(20) - 10}vw; 
+      --speed: ${5 + random(15)}s;
+      --size: ${random(5) * 0.2}vw; 
+      --delay: -${random(15)}s;
+    `;
+    
+    container.appendChild(flake);
+  }
+}
+
+function stopSnow() {
+  document.getElementById('snow-container').innerHTML = '';
 }
 
 const textNodes = [

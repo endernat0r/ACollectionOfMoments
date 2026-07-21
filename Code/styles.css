@@ -87,3 +87,31 @@ body {
     transform: scale(1);
   }
 }
+
+#snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Prevents the snow from blocking button clicks */
+  overflow: hidden;
+  z-index: 1; 
+}
+
+.snowflake {
+  width: var(--size);
+  height: var(--size);
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: -5vh;
+  left: var(--left);
+  animation: snowfall var(--speed) linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes snowfall {
+  0% { transform: translate3d(var(--left-ini), 0, 0); }
+  100% { transform: translate3d(var(--left-end), 110vh, 0); }
+}
