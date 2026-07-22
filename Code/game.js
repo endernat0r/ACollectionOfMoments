@@ -57,7 +57,7 @@ function triggerMagicEffect() {
   setTimeout(() => {
     overlay.classList.remove('magic-active')
     body.classList.remove('shake-active')
-  }, 1200)
+  }, 2000)
 }
 
 function startSnow() {
@@ -179,7 +179,7 @@ const textNodes = [
     ]
   },
   {id: 7,
-    text: 'A great mage comes and asks you what they did to move on.',
+    text: 'Üstat comes and asks you what they did to move on.',
     options: [
         {
             text: 'Oh no I forgot to watch them',
@@ -202,10 +202,15 @@ const textNodes = [
   },
   {
     id: 9,
+    // End of Chapter 1
     text: 'Üstat is pleased and treats you to a döner and künefe.',
     options: [
         {text: '🎉Thank you Üstat🎉', nextText: 10}
     ]
+  },
+  {
+    id: 10,
+    text: 'You find yourself on the audition for the drama club. You are asked to perform a character of your choosing. You perform it.',
   }
 ]
 
