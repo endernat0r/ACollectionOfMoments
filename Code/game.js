@@ -102,6 +102,75 @@ button.addEventListener('click', () => {
   }
 });
 
+const storyContainer = document.querySelector('.container'); 
+const whackAMoleContainer = document.getElementById('whack-a-mole-game');
+const holes = document.querySelectorAll(".hole");
+const scoreDisplay = document.getElementById("score");
+const timerDisplay = document.getElementById("timer");
+
+let whackScore = 0;
+let whackTimer = 30;
+let countdownInterval;
+let moleInterval;
+let isMinigameActive = false;
+
+holes.forEach(hole => {
+    hole.addEventListener('click', function() {
+        if (isMinigameActive && this.classList.contains('mole')) {
+            whackScore++;
+            scoreDisplay.textContent = `Score: ${whackScore}`;
+            this.classList.remove('mole');
+        }
+    });
+});
+
+function randomMoleComeOut() {
+    holes.forEach(hole => hole.classList.remove('mole'));
+
+    let randomHole = holes[Math.floor(Math.random() * 9)];
+    randomHole.classList.add('mole');
+}
+
+function startWhackAMoleMinigame() {
+    storyContainer.style.display = 'none';
+    whackAMoleContainer.style.display = 'block';
+
+    isMinigameActive = true;
+    whackScore = 0;
+    whackTimer = 30;
+    scoreDisplay.textContent = `Score: ${whackScore}`;
+    timerDisplay.textContent = `Time: ${whackTimer}s`;
+
+    countdownInterval = setInterval(() => {
+        whackTimer--;
+        timerDisplay.textContent = `Time: ${whackTimer}s`;
+
+        if (whackTimer <= 0) {
+            endWhackAMoleMinigame();
+        }
+    }, 1000);
+
+    moleInterval = setInterval(() => {
+        if (isMinigameActive) randomMoleComeOut();
+    }, 800);
+}
+
+function endWhackAMoleMinigame() {
+    isMinigameActive = false;
+    clearInterval(countdownInterval);
+    clearInterval(moleInterval);
+    holes.forEach(hole => hole.classList.remove('mole'));
+
+    whackAMoleContainer.style.display = 'none';
+    storyContainer.style.display = 'block';
+
+    if (whackScore >= 15) {
+        showTextNode(11); 
+    } else {
+        showTextNode(12); 
+    }
+}
+
 const textNodes = [
   {
     id: 1,
@@ -115,6 +184,10 @@ const textNodes = [
       {
         text: 'Sleep',
         nextText: 2
+      },
+      {
+        text: 'Developer button (for testing)',
+        nextText: 10
       }
     ]
   },
@@ -210,7 +283,35 @@ const textNodes = [
   },
   {
     id: 10,
-    text: 'You find yourself on the audition for the drama club. You are asked to perform a character of your choosing. You perform it.',
+    text: 'You find yourself at the audition for the english performance arts club. You have to select students very fast!',
+    options: [
+      {
+        text: 'Start Audition (Minigame)',
+        action: startWhackAMoleMinigame
+      }
+    ]
+  },
+  {
+    id: 11,
+    text: 'Ömer: "Magnificent! I found a ton of amazing people!"',
+    options: [
+      { text: 'Be happy and go into another memory', nextText: 13 }
+    ]
+  },
+  {
+    id: 12,
+    text: 'Ömer: "Too slow! These people are trash. You are rejected!"',
+    options: [
+      { text: 'Try Audition Again', action: startWhackAMoleMinigame },
+      { text: 'Restart The Whole Adventure (Dont do that)', nextText: -1 }
+    ]
+  },
+  {
+    id: 13,
+    text: 'You find yourself in a new memory.',
+    options: [
+
+    ]
   }
 ]
 
