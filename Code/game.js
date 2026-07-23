@@ -152,7 +152,7 @@ function startWhackAMoleMinigame() {
 
     moleInterval = setInterval(() => {
         if (isMinigameActive) randomMoleComeOut();
-    }, 800);
+    }, 500);
 }
 
 function endWhackAMoleMinigame() {

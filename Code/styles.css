@@ -11,7 +11,15 @@ body {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #333;
+  background-color:#556;
+  background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+  linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+  linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+  linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+  linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a), 
+  linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
+  background-size:80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
 
 .container {
@@ -123,57 +131,23 @@ body {
   padding: 15px 15px;
   font-size: 18px;
   font-weight: bold;
-  background-color: rgb(19, 255, 19);
+  background-color: rgb(50, 50, 50);
   color: white;
   border: none;
   border-radius: 100px;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
-  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.4);
+  box-shadow: 0 4px 15px rgba(104, 104, 104, 0.4);
 }
 
 .playButton:hover {
-  background-color: #1ed760;
+  background-color: #777777;
   transform: scale(1.05);
 }
 
 .playButton.paused {
-  background-color: #e91e63;
-  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
-}
-
-.bg {
-  animation:slide 3s ease-in-out infinite alternate;
-  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
-  bottom:0;
-  left:-50%;
-  opacity:.5;
-  position:fixed;
-  right:-50%;
-  top:0;
-  z-index:-1;
-}
-
-.bg2 {
-  animation-direction:alternate-reverse;
-  animation-duration:4s;
-}
-
-.bg3 {
-  animation-duration:5s;
-}
-
-.content {
-  background-color:rgba(255,255,255,.8);
-  border-radius:.25em;
-  box-shadow:0 0 .25em rgba(0,0,0,.25);
-  box-sizing:border-box;
-  left:50%;
-  padding:10vmin;
-  position:fixed;
-  text-align:center;
-  top:50%;
-  transform:translate(-50%, -50%);
+  background-color: #3a282e;
+  box-shadow: 0 4px 15px rgba(83, 69, 74, 0.4);
 }
 
 h1 {
@@ -189,14 +163,34 @@ h1 {
   }
 }
 
-.title{
-  font-size: 2.5rem;
+.title {
   position: fixed;
-  top: 20px;
+  top: 140px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Brush Script MT', cursive;
-  color: rgb(255, 255, 255);
+  
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #e0e5ec;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  white-space: nowrap;
+  text-align: center;
+
+  text-shadow:
+    0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25),
+    0 10px 10px rgba(0,0,0,.2);
 }
 
 .whack-a-mole{
