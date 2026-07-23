@@ -29,6 +29,16 @@ function showTextNode(textNodeIndex) {
       optionButtonsElement.appendChild(button)
     }
   })
+
+  const sliderScreen = document.getElementById('slider-screen');
+
+  if (textNodeIndex === 14) {
+    storyContainer.style.display = 'none';
+    sliderScreen.style.display = 'flex';
+  } else {
+    storyContainer.style.display = 'block';
+    if (sliderScreen) sliderScreen.style.display = 'none';
+  }
 }
 
 function showOption(option) {
@@ -109,7 +119,7 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 
 let whackScore = 0;
-let whackTimer = 30;
+let whackTimer = 15;
 let countdownInterval;
 let moleInterval;
 let isMinigameActive = false;
@@ -137,7 +147,7 @@ function startWhackAMoleMinigame() {
 
     isMinigameActive = true;
     whackScore = 0;
-    whackTimer = 30;
+    whackTimer = 15;
     scoreDisplay.textContent = `Score: ${whackScore}`;
     timerDisplay.textContent = `Time: ${whackTimer}s`;
 
@@ -171,6 +181,30 @@ function endWhackAMoleMinigame() {
     }
 }
 
+const slider = document.getElementById("myRange");
+const sliderText = document.getElementById("slider-text");
+
+slider.oninput = function() {
+  let val = parseInt(this.value);
+  
+  if (val < 25) {
+    sliderText.innerText = "Starting the intro";
+  } else if (val < 50) {
+    sliderText.innerText = "Presenting";
+  } else if (val < 75) {
+    sliderText.innerText = "The delegate convincing the AI";
+  } else if (val < 100) {
+    sliderText.innerText = "Getting a million claps";
+  } else if (val === 100) {
+    sliderText.innerText = "Publishing papers and getting featured in school instagram";
+  }
+}
+
+function endSlider() {
+  document.getElementById('slider-screen').style.display = 'none';
+  showTextNode(15);
+}
+
 const textNodes = [
   {
     id: 1,
@@ -187,7 +221,7 @@ const textNodes = [
       },
       {
         text: 'Developer button (for testing)',
-        nextText: 10
+        nextText: 11
       }
     ]
   },
@@ -308,9 +342,16 @@ const textNodes = [
   },
   {
     id: 13,
-    text: 'You find yourself in a new memory.',
+    text: 'You find yourself presenting a workshop in Düsseldorf, Germany.',
     options: [
-
+      { text: 'Continue', nextText: 14 }
+    ]
+  },
+  {
+    id: 14,
+    text: 'This is a bug. You should not be here.',
+    options: [
+      { text: 'The End', nextText: -1 }
     ]
   }
 ]
