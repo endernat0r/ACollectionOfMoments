@@ -14,7 +14,9 @@
 <body> 
   <div id="magic-overlay"></div>
   <div id="snow-container"></div>
+  
   <h1 id="title" class="title">A Collection of Moments</h1>
+  
   <div id="whack-a-mole-game" class="whack-a-mole">
     <div class="game-info">
       <div id="score">Score: 0</div>
@@ -32,6 +34,7 @@
       <div class="hole" id="hole9"></div>
     </div>
   </div>
+  
   <div id="slider-screen">
     <h2 id="slider-text">Starting the intro</h2>
     <div class="slidecontainer">
@@ -39,26 +42,34 @@
     </div>
     <button class="btn" style="margin-top: 40px;" onclick="endSlider()">Finish Workshop</button>
   </div>
+  
   <div id="cps-minigame-wrapper" style="display: none;">    
     <div id="cps-content">
       Timer: <span id="cps-timer">0.000</span><br/>
       Score: <span id="cps-score">0</span><br/>
       Clicks/s: <span id="cps-cps">0.00</span>
     </div>
-    
     <div id="cps-clickarea">
       <button id="cps-start">Start</button>
     </div>
   </div>
+
+  <div id="wordle-minigame-wrapper" style="display: none; text-align: center; background-color: #f0f0f0; padding: 20px; border-radius: 10px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; box-shadow: 0 0 15px rgba(0,0,0,0.5);">
+    <h1 style="color: black; font-family: Arial; margin-bottom: 5px;">Wordle</h1>
+    <h3 id="wordle-stage-text" style="color: #555; margin-top: 0; font-family: Arial;">Word 1 of 2</h3>
+    <div id="wordle-gameBoard"></div>
+    <div style="margin-top: 15px;">
+      <input type="text" id="wordle-guessInput" maxlength="5" style="font-size: 1.2em; padding: 5px; width: 120px; text-transform: uppercase;">
+      <button id="wordle-guessButton" class="btn" style="font-size: 1.2em; padding: 5px 15px;">Guess</button>
+    </div>
+  </div>
+  
   <div class="container">
     <div id="text">Text</div>
     <div id="option-buttons" class="btn-grid">
-      <button class="btn">Option 1</button>
-      <button class="btn">Option 2</button>
-      <button class="btn">Option 3</button>
-      <button class="btn">Option 4</button>
     </div>
   </div>
+  
   <audio id="myTrack">
     <source src="EndaminYeter.mp3" type="audio/mpeg">
   </audio>

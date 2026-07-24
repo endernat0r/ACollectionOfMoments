@@ -45,6 +45,7 @@ body {
   padding: 5px 10px;
   color: white;
   outline: none;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -154,31 +155,19 @@ h1 {
   font-family:monospace;
 }
 
-@keyframes slide {
-  0% {
-    transform:translateX(-25%);
-  }
-  100% {
-    transform:translateX(25%);
-  }
-}
-
 .title {
   position: fixed;
   top: 140px;
   left: 50%;
   transform: translateX(-50%);
-  
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
   color: #e0e5ec;
   text-transform: uppercase;
   letter-spacing: 2px;
-  
   white-space: nowrap;
   text-align: center;
-
   text-shadow:
     0 1px 0 #ccc,
     0 2px 0 #c9c9c9,
@@ -205,20 +194,6 @@ h1 {
     margin: 20px;
 }
 
-#startButton {
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#endButton {
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
 .game-container {
     background-color: rgb(255, 136, 68);
     display: grid;
@@ -227,7 +202,6 @@ h1 {
     border: 2px solid rgb(216, 216, 216);
     padding: 20px;
     border-radius: 10px;
-
 }
 
 .hole {
@@ -240,8 +214,7 @@ h1 {
 
 .mole {
     background-size: 150px;
-    background-image: url(
-    "lol.jpeg")
+    background-image: url("lol.jpeg")
 }
 #slider-screen {
   display: none;
@@ -329,4 +302,42 @@ h1 {
 #cps-start:hover { background-color: rgba(255, 0, 0, 1); }
 #cps-start:active { 
   box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6), inset 2px 2px 3px rgba(0, 0, 0, .6); 
+}
+
+#wordle-gameBoard {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 20px auto;
+  max-width: fit-content;
+}
+
+.wordle-cell {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #333;
+  text-align: center;
+  line-height: 60px;
+  font-size: 2em;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+.wordle-cell.correct {
+  background: #538d4e;
+  color: white;
+  border-color: #538d4e;
+}
+
+.wordle-cell.semi-correct {
+  background: #b59f3b;
+  color: white;
+  border-color: #b59f3b;
+}
+
+.wordle-cell.incorrect {
+  background: #3a3a3c;
+  color: white;
+  border-color: #3a3a3c;
 }
