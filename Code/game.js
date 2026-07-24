@@ -46,15 +46,18 @@ function showOption(option) {
 }
 
 function selectOption(option) {
-  const nextTextNodeId = option.nextText
-  if (nextTextNodeId <= 0) {
-    return startGame()
-  }
   if (option.action) {
-    option.action()
+    option.action();
+    if (!option.nextText) return; 
   }
-  state = Object.assign(state, option.setState)
-  showTextNode(nextTextNodeId)
+  
+  const nextTextNodeId = option.nextText;
+  if (nextTextNodeId <= 0) {
+    return startGame();
+  }
+  
+  state = Object.assign(state, option.setState || {});
+  showTextNode(nextTextNodeId);
 }
 
 function triggerMagicEffect() {
@@ -205,6 +208,84 @@ function endSlider() {
   showTextNode(15);
 }
 
+var cpsScore; 
+var cpsDuration = 5; 
+var cpsStartTime; 
+var cpsEnded = true; 
+
+var timerTxt = document.getElementById("cps-timer");
+var scoreTxt = document.getElementById("cps-score");
+var clicksTxt = document.getElementById("cps-cps");
+var startBtn = document.getElementById("cps-start");
+var clickArea = document.getElementById("cps-clickarea");
+
+var show = function(elem) { elem.style.display = 'inline'; };
+var hide = function(elem) { elem.style.display = 'none'; };
+
+function startClickSpeedGame() {
+  hide(startBtn);
+  cpsScore = -1; 
+  cpsEnded = false;
+  
+  cpsStartTime = new Date().getTime();
+  
+  var timerId = setInterval(function() {
+    var total = (new Date().getTime() - cpsStartTime) / 1000;
+    
+    if (total < cpsDuration) {
+      timerTxt.textContent = total.toFixed(3);
+      clicksTxt.textContent = (cpsScore / total).toFixed(2);
+    } else {
+      cpsEnded = true;
+      clearInterval(timerId);
+      endClickSpeedGame();
+    }
+  }, 1);
+}
+
+startBtn.addEventListener("click", function(e) {
+  startClickSpeedGame();
+});
+
+clickArea.addEventListener("click", function(e) {
+  if (!cpsEnded) {
+    cpsScore++;
+    scoreTxt.textContent = cpsScore;
+  }
+});
+
+function launchClickSpeedMinigame() {
+  document.querySelector('.container').style.display = 'none';
+  document.getElementById('cps-minigame-wrapper').style.display = 'block';
+  document.getElementById('cps-start').style.display = 'inline';
+  document.getElementById('cps-score').textContent = '0';
+  document.getElementById('cps-timer').textContent = '0.000';
+  document.getElementById('cps-cps').textContent = '0.00';
+}
+
+function endClickSpeedGame() {
+  var clicsBySeconds = (cpsScore / cpsDuration).toFixed(2);
+  timerTxt.textContent = cpsDuration.toFixed(3);
+  clicksTxt.textContent = clicsBySeconds;
+  
+  show(startBtn);
+  
+  setTimeout(function() {
+    alert('You made ' + cpsScore + ' clicks in ' + cpsDuration + 
+    ' seconds. It is ' + clicsBySeconds + 
+    ' clicks by seconds.');
+    
+    document.getElementById('cps-minigame-wrapper').style.display = 'none';
+    document.querySelector('.container').style.display = 'block';
+    
+    if (cpsScore >= 25) {
+        showTextNode(17);
+    } else {
+        showTextNode(18);
+    }
+  }, 10);
+}
+
 const textNodes = [
   {
     id: 1,
@@ -221,7 +302,7 @@ const textNodes = [
       },
       {
         text: 'Developer button (for testing)',
-        nextText: 11
+        nextText: 20
       }
     ]
   },
@@ -352,6 +433,78 @@ const textNodes = [
     text: 'This is a bug. You should not be here.',
     options: [
       { text: 'The End', nextText: -1 }
+    ]
+  },
+  {
+    id: 15,
+    text: 'You succesfully presented the workshop! You get sucked into the Tokyo Town streets.',
+    options: [
+      { text: 'Please gimme some takoyaki or red bean paste buns.', nextText: 16 }
+    ]
+  },
+  {
+    id: 16,
+    text: 'You are now in the streets! But the shops are closing and you dont have much time!',
+    options: [
+      { text: 'SMASH THOSE BUTTONS', action: launchClickSpeedMinigame}
+    ]
+  },
+  {
+    id: 17,
+    text: 'You used AI to create a program and followed it to do everything the streets had to offer (Even the vanilla takoyaki)!',
+    options: [
+      {text: 'You go onto Macaristan and see youself with Ecrin presenting your paper', nextText: 19}
+    ]
+  },
+  {
+    id: 18,
+    text: 'You were NOT able to experience everything the streets had to offer. ',
+    options: [
+      { text: 'Try again', nextText: 16}
+    ]
+  },
+  {
+    id: 19,
+    text: 'In the paper there are a ton of words, which do you choose to highlight?',
+    options: [
+      { text: 'Highlight the introduction', nextText: 20 },
+      {text: 'Highlight the body', nextText: 15 },
+      {text: 'Highlight the conclusion', nextText: 15 }
+    ]
+  },
+  {
+    id: 20,
+    text: 'Yea the other answers are just shitpost. If you answered wrongly you would be a dummy but thank god you know literature thanks to a vegan. Also I sent you back in time a bit if you clicked the wrong answer but I dont think there is a problem with it, you DEFINITELY didnt choose those so no problem',
+    options: [
+      { text: 'So know what?', nextText: 21 }
+    ]
+  },
+  {
+    id: 21,
+    text: 'Dunno',
+    options: [
+      { text: 'The heck, I aint the one writing this adventure, you are. Gimme something to play!', nextText: 22}
+    ]
+  },
+  {
+    id: 22,
+    text: 'No',
+    options: [
+      {text: 'If you dont I am gonna add 5 minutes...', nextText: 23}
+    ]
+  },
+  {
+    id: 23,
+    text: 'OK DAMMIT WAIT A SEC PLEASE PLEASE I AM SURE THERE IS SOMETHING FOR YOU HERE!!!!',
+    options: [
+      {text: 'Thats more like it... >:)', nextText: 24}
+    ]
+  },
+  {
+    id: 24,
+    text: 'Ok so I found a wordle, maybe you can play that.... just dont add minutes pleassseeeeeeee',
+    options: [
+      {text: 'Ok I will forgive you just this once...', nextText: 25}
     ]
   }
 ]

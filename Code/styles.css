@@ -278,3 +278,55 @@ h1 {
   width: 100%;
   display: block;
 }
+#cps-minigame-wrapper {
+  background-color: #000000;
+  padding: 30px;
+  border-radius: 10px;
+  width: fit-content;
+  margin: auto auto 40px auto; 
+}
+#cps-content {
+  width: 200px;
+  border: 1px dashed #dc0000;
+  font-size: 20px;
+  text-align: center;
+  margin: 20px auto 0 auto;
+  padding: 20px;
+  user-select: none;
+  color: #ffffff;
+}
+
+#cps-clickarea {
+  width: 500px;
+  height: 300px;
+  border: 2px solid #dc0000;
+  font-size: 20px;
+  text-align: center;
+  margin: 50px auto 0 auto;
+  padding: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+#cps-start {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: rgba(220, 0, 0, 1);
+  background-image: linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0));
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6);
+  cursor: pointer;
+}
+
+#cps-start:hover { background-color: rgba(255, 0, 0, 1); }
+#cps-start:active { 
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6), inset 2px 2px 3px rgba(0, 0, 0, .6); 
+}
